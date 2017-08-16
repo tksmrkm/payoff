@@ -11,7 +11,9 @@ const UserListNode = ({ user, onClickToggle, onClickRemove }) => {
     };
 
     const handleRemove = event => {
-        onClickRemove(user.id);
+        if (confirm(`Remove: "{user.name}"`)) {
+            onClickRemove(user.id);
+        }
     }
 
     const style = user.done ? disabled: {};
