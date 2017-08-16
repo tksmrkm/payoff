@@ -11,7 +11,7 @@ const UserListNode = ({ user, onClickToggle, onClickRemove }) => {
     };
 
     const handleRemove = event => {
-        if (confirm(`Remove: "{user.name}"`)) {
+        if (confirm(`Remove: "${user.name}"`)) {
             onClickRemove(user.id);
         }
     }
