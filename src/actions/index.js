@@ -37,13 +37,14 @@ export function switchTabs(id) {
 };
 
 let dealing_id = 0;
-export function addDealing(user_id, name, value) {
+export function addDealing(user_id, name, value, ignore_users) {
     return {
         type: 'ADD_DEALING',
         id: dealing_id++,
         user_id,
         name,
-        value
+        value,
+        ignore_users
     };
 };
 
@@ -54,11 +55,12 @@ export function removeDealing(id) {
     }
 };
 
-export function editDealing(id, user_id, name, value) {
+export function editDealing(id, user_id, name, value, ignore_users) {
     return {
         type: 'EDIT_DEALING',
         id,
         name,
-        value
+        value,
+        ignore_users
     };
 };
