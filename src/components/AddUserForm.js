@@ -29,6 +29,7 @@ const AddUserForm = ({onSubmitAddUser}) => {
                 color="primary"
                 raised={true}
                 style={row}
+                type="submit"
             >Add User</Button>
         </form>
     );

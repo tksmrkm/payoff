@@ -2,6 +2,7 @@ import React from 'react';
 import UserListNode from './UserListNode';
 import { connect } from 'react-redux';
 import { toggleUser } from '../actions';
+import List from 'material-ui/List';
 
 const UserList = ({users, onClickToggle}) => {
     let id = 0;
@@ -16,9 +17,9 @@ const UserList = ({users, onClickToggle}) => {
     });
 
     return (
-        <ul>
+        <List>
             {userListNodes}
-        </ul>
+        </List>
     )
 };
 

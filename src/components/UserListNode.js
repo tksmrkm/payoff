@@ -1,20 +1,57 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ListItem, ListItemSecondaryAction, ListItemText, IconButton } from 'material-ui';
+import DeleteIcon from 'material-ui-icons/Delete';
+import { disabled } from '../styles';
+import { toggleUser, removeUser } from '../actions';
 
-const UserListNode = ({user}) => {
-    console.log(user);
+const UserListNode = ({ user, onClickToggle, onClickRemove }) => {
+    const handleToggle = (event) => {
+        onClickToggle(user.id);
+    };
+
+    const handleRemove = event => {
+        onClickRemove(user.id);
+    }
+
+    const style = user.done ? disabled: {};
+
     return (
-        <li>
-            <dl>
-                <dt>Name</dt>
-                <dd>{user.name}</dd>
-                <dt>支出</dt>
-                <dd>{user.expense}</dd>
-                <dt>請求</dt>
-                <dd>{user.gain}</dd>
-            </dl>
-        </li>
+        <ListItem
+            button
+            onClick={handleToggle}
+            style={style}
+        >
+            <ListItemText
+                primary={user.name}
+            />
+            <ListItemSecondaryAction>
+                <IconButton
+                    aria-label="Remove"
+                    onClick={handleRemove}
+                >
+                    <DeleteIcon />
+                </IconButton>
+            </ListItemSecondaryAction>
+        </ListItem>
     );
 };
 
-export default connect()(UserListNode);
+const mapStateToProps = state => {
+    return {
+        users: state.users
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onClickToggle: id => {
+            dispatch(toggleUser(id))
+        },
+        onClickRemove: id => {
+            dispatch(removeUser(id))
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserListNode);

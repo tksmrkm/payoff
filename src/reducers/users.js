@@ -18,6 +18,10 @@ export default (state = [], action) => {
                 }
                 return user;
             });
+        case 'REMOVE_USER':
+            return state.filter(user => {
+                return user.id !== action.id;
+            });
         default:
             return state;
     }

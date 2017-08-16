@@ -5,3 +5,7 @@ export const wrapper = {
 export const row = {
     marginBottom: '1em'
 };
+
+export const disabled = {
+    backgroundColor: '#CCC'
+};
