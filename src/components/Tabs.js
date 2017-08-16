@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { switchTabs } from '../actions';
+import { wrapper } from '../styles';
 import {
     Tab,
     Tabs as BaseTabs
@@ -10,6 +11,7 @@ const Tabs = ({tabs, onSwitchTabs, children}) => {
     const onChange = (event, value) => {
         onSwitchTabs(value);
     };
+
     return (
         <div>
             <BaseTabs
@@ -28,7 +30,9 @@ const Tabs = ({tabs, onSwitchTabs, children}) => {
                     label="Result"
                 />
             </BaseTabs>
-            {children[tabs]}
+            <div style={wrapper}>
+                {children[tabs]}
+            </div>
         </div>
     );
 };
