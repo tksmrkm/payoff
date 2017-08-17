@@ -18,6 +18,7 @@ export default (state = [], action) => {
         case 'EDIT_DEALING':
             return state.map(dealing => {
                 if (dealing.id === action.id) {
+                    dealing.user_id = action.user_id;
                     dealing.name = action.name;
                     dealing.value = action.value;
                     dealing.ignore_users = action.ignore_users;
