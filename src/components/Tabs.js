@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { switchTabs } from '../actions';
-import { wrapper } from '../styles';
+import { main } from '../styles';
 import {
+    AppBar,
     Tab,
     Tabs as BaseTabs
 } from 'material-ui';
@@ -14,25 +15,24 @@ const Tabs = ({tabs, onSwitchTabs, children}) => {
 
     return (
         <div>
-            <BaseTabs
-                centered={true}
-                fullWidth={true}
-                value={tabs}
-                onChange={onChange}
-            >
-                <Tab
-                    label="Users"
-                />
-                <Tab
-                    label="Dealings"
-                />
-                <Tab
-                    label="Result"
-                />
-            </BaseTabs>
-            <div style={wrapper}>
+            <main style={main}>
                 {children[tabs]}
-            </div>
+            </main>
+            <footer>
+                <BaseTabs
+                    centered={true}
+                    fullWidth={true}
+                    value={tabs}
+                    onChange={onChange}
+                >
+                    <Tab
+                        label="Users"
+                    />
+                    <Tab
+                        label="Dealings"
+                    />
+                </BaseTabs>
+            </footer>
         </div>
     );
 };

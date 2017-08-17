@@ -3,6 +3,7 @@ import UserListNode from './UserListNode';
 import { connect } from 'react-redux';
 import { toggleUser } from '../actions';
 import List from 'material-ui/List';
+import { wrapper } from '../styles';
 
 const UserList = ({users, onClickToggle}) => {
     let id = 0;
@@ -17,7 +18,7 @@ const UserList = ({users, onClickToggle}) => {
     });
 
     return (
-        <List>
+        <List style={wrapper}>
             {userListNodes}
         </List>
     )

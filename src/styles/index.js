@@ -1,3 +1,7 @@
+export const main = {
+    flex: '1 0 auto'
+};
+
 export const wrapper = {
     padding: '1em'
 };

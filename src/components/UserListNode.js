@@ -16,7 +16,14 @@ const UserListNode = ({ user, onClickToggle, onClickRemove }) => {
         }
     }
 
+    const localeString = num => {
+        return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+    };
+
     const style = user.done ? disabled: {};
+
+    const expense = localeString(user.expense);
+    const gain = localeString(user.gain);
 
     return (
         <ListItem
@@ -26,6 +33,7 @@ const UserListNode = ({ user, onClickToggle, onClickRemove }) => {
         >
             <ListItemText
                 primary={user.name}
+                secondary={`出費: ${expense}, 清算額: ${gain}`}
             />
             <ListItemSecondaryAction>
                 <IconButton

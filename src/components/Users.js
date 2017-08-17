@@ -6,8 +6,8 @@ import AddUserForm from './AddUserForm';
 const Users = () => {
     return (
         <div>
-            <AddUserForm />
             <UserList />
+            <AddUserForm />
         </div>
     );
 };

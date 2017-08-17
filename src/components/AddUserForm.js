@@ -1,21 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addUser } from '../actions';
-import { row } from '../styles';
+import { row, wrapper } from '../styles';
 import { TextField, Button } from 'material-ui';
 
 const AddUserForm = ({onSubmitAddUser}) => {
     let input;
 
     return (
-        <form onSubmit={e => {
-            e.preventDefault();
-            if (!input.value.trim()) {
-                return
-            }
-            onSubmitAddUser(input.value);
-            input.value = '';
-        }}>
+        <form
+            onSubmit={e => {
+                e.preventDefault();
+                if (!input.value.trim()) {
+                    return
+                }
+                onSubmitAddUser(input.value);
+                input.value = '';
+            }}
+            style={wrapper}
+        >
             <TextField
                 inputRef={node => {
                     input = node;
