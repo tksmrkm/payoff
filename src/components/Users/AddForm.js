@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addUser } from '../actions';
-import { row, wrapper } from '../styles';
+import { addUser } from '../../actions';
+import { row, wrapper } from '../../styles';
 import { TextField, Button } from 'material-ui';
 
-const AddUserForm = ({onSubmitAddUser}) => {
+const AddForm = ({onSubmitAddUser}) => {
     let input;
 
     return (
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(AddUserForm);
+export default connect(null, mapDispatchToProps)(AddForm);

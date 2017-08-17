@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserList from './UserList';
-import AddUserForm from './AddUserForm';
+import AddForm from './AddForm';
 
 const Users = () => {
     return (
         <div>
             <UserList />
-            <AddUserForm />
+            <AddForm />
         </div>
     );
 };

@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListItem, ListItemSecondaryAction, ListItemText, IconButton } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
-import { disabled } from '../styles';
-import { toggleUser, removeUser } from '../actions';
+import { disabled } from '../../styles';
+import { toggleUser, removeUser } from '../../actions';
 
-const UserListNode = ({ user, onClickToggle, onClickRemove }) => {
+const ListNode = ({ user, onClickToggle, onClickRemove }) => {
     const handleToggle = (event) => {
         onClickToggle(user.id);
     };
@@ -64,4 +64,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserListNode);
+export default connect(mapStateToProps, mapDispatchToProps)(ListNode);

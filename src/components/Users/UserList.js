@@ -1,16 +1,16 @@
 import React from 'react';
-import UserListNode from './UserListNode';
+import ListNode from './ListNode';
 import { connect } from 'react-redux';
-import { toggleUser } from '../actions';
+import { toggleUser } from '../../actions';
 import List from 'material-ui/List';
-import { wrapper } from '../styles';
+import { wrapper } from '../../styles';
 
 const UserList = ({users, onClickToggle}) => {
     let id = 0;
 
-    const userListNodes = users.map(user => {
+    const nodes = users.map(user => {
         return (
-            <UserListNode
+            <ListNode
                 user={user}
                 key={user.id}
             />
@@ -19,7 +19,7 @@ const UserList = ({users, onClickToggle}) => {
 
     return (
         <List style={wrapper}>
-            {userListNodes}
+            {nodes}
         </List>
     )
 };
