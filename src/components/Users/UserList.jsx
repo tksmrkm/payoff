@@ -5,6 +5,10 @@ import { toggleUser } from '../../actions';
 import List from 'material-ui/List';
 import { wrapper } from '../../styles';
 
+const sum = (prev, current) => {
+    return prev + current;
+};
+
 const UserList = ({users, onClickToggle}) => {
     let id = 0;
 
@@ -27,16 +31,28 @@ const UserList = ({users, onClickToggle}) => {
 const mapStateToProps = ({users, dealings}) => {
     const changed = users
     .map(user => {
-        user.expense = dealings
+        const total_to_pay = dealings
+        .map(dealing => {
+            if (dealing.ignore_users.includes(user.id)) {
+                return 0;
+            }
+
+            return parseInt(dealing.value);
+        })
+        .reduce(sum, 0);
+
+        const expense = dealings
         .map(dealing => {
             if (dealing.user_id === user.id) {
                 return parseInt(dealing.value);
             }
             return 0;
         })
-        .reduce((prev, current) => {
-            return prev + current;
-        });
+        .reduce(sum, 0);
+
+        user.expense = expense;
+
+        user.gain = (total_to_pay / users.length) - expense;
 
         return user;
     });
