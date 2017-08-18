@@ -1,31 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addDealing } from '../../actions';
+import { addDealing, toggleSelectUserMenu } from '../../actions';
 import { row, wrapper } from '../../styles';
 import { TextField, Button, Menu, MenuItem } from 'material-ui';
 
-let open = false;
+const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, users, menus}) => {
+    let name, value, ignore_users, selected_user_node, selected_user, ignored, ignored_node;
 
-const MenuState = {
-    anchorEl: null,
-    onRequestClose: () => {
-        open = false;
-    },
-    selected: 0,
-    onClick: (user_id) => {
-        MenuState.selected = user_id;
-        open = false;
-        console.log(MenuState);
-    },
-    handleOpen: event => {
-        console.log(MenuState);
-        open = true;
-        MenuState.anchorEl = event.target;
-    }
-};
-
-const AddForm = ({onSubmitAddDealing, users}) => {
-    let name, value, ignore_users;
+    const onChangeIgnored = options => {
+        const list = [];
+        for (let i of options) {
+            if (options.selected) {
+                list.push(i.value);
+            }
+        }
+        console.log(list);
+        ignore_users = list;
+    };
+    const onResetIgnored = () => {
+        for (let i of ignored.options) {
+            i.selected = false;
+        }
+    };
 
     return (
         <form
@@ -34,35 +30,24 @@ const AddForm = ({onSubmitAddDealing, users}) => {
                 if (!name.value.trim() || !value.value.trim()) {
                     return;
                 }
-                onSubmitAddDealing(MenuState.selected, name.value, value.value, []);
+                onSubmitAddDealing(selected_user.value, name.value, value.value, ignored);
+                selected_user.value = '';
                 name.value = '';
                 value.value = '';
-                MenuState.selected = 0;
+                onResetIgnored();
             }}
             style={wrapper}
         >
-            <Button
-                aria-owns={open ? 'simple-menu': null}
-                aria-haspopup="true"
-                onClick={MenuState.handleOpen}
-            >Select User</Button>
-            <Menu
-                anchorEl={MenuState.anchorEl}
-                open={open}
-                onRequestClose={MenuState.onRequestClose}
+            <select
+                ref={node => {
+                    selected_user = node;
+                }}
             >
+                <option value="0">▼ 選択 ▼</option>
                 {users.map((user) => 
-                    <MenuItem
-                        key={user.id}
-                        selected={user.id === MenuState.selected}
-                        onClick={event => {
-                            MenuState.onClick(user.id);
-                        }}
-                    >
-                        {user.name}
-                    </MenuItem>
+                    <option key={user.id} value={user.id}>{user.name}</option>
                 )}
-            </Menu>
+            </select>
             <TextField
                 inputRef={node => {
                     name = node;
@@ -82,6 +67,21 @@ const AddForm = ({onSubmitAddDealing, users}) => {
                 style={row}
                 type="number"
             />
+            <div style={row}>
+                <select
+                    ref={node => {
+                        ignored = node;
+                    }}
+                    onChange={event => {
+                        onChangeIgnored(ignored.options);
+                    }}
+                    multiple
+                >
+                    {users.map((user) => 
+                        <option key={user.id} value={user.id}>{user.name}</option>
+                    )}
+                </select>
+            </div>
             <Button
                 color="accent"
                 raised={true}
@@ -92,9 +92,10 @@ const AddForm = ({onSubmitAddDealing, users}) => {
     );
 };
 
-const mapStateToProps = ({users, }) => {
+const mapStateToProps = ({users, menus}) => {
     return {
-        users
+        users,
+        menus
     };
 }
 
@@ -102,6 +103,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onSubmitAddDealing: (user_id, name, value, ignore_users) => {
             dispatch(addDealing(user_id, name, value, ignore_users));
+        },
+        onToggleSelectUserMenu: (state) => {
+            dispatch(toggleSelectUserMenu(state));
         }
     };
 };

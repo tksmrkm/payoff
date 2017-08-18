@@ -6,6 +6,8 @@ import { disabled } from '../../styles';
 import { toggleUser, removeUser } from '../../actions';
 
 const ListNode = ({ user, onClickToggle, onClickRemove }) => {
+    console.log(user);
+
     const handleToggle = (event) => {
         onClickToggle(user.id);
     };
@@ -47,12 +49,6 @@ const ListNode = ({ user, onClickToggle, onClickRemove }) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        users: state.users
-    };
-};
-
 const mapDispatchToProps = dispatch => {
     return {
         onClickToggle: id => {
@@ -64,4 +60,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListNode);
+export default connect(null, mapDispatchToProps)(ListNode);

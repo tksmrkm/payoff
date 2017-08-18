@@ -77,3 +77,10 @@ export function editDealing(id, user_id, name, value, ignore_users) {
         ignore_users
     };
 };
+
+export function toggleSelectUserMenu(state) {
+    return {
+        type: 'TOGGLE_SELECT_USER_MENU',
+        state
+    };
+};
