@@ -22,7 +22,7 @@ const ListNode = ({ dealing,  onClickRemove }) => {
         <ListItem>
             <ListItemText
                 primary={dealing.name}
-                secondary={`金額: ${dealing}`}
+                secondary={`金額: ${value}`}
             />
             <ListItemSecondaryAction>
                 <IconButton
