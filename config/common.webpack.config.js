@@ -4,7 +4,7 @@ const constants = require('./const');
 const config = {
     context: constants.context,
     entry: {
-        bundle: './bundle.js'
+        bundle: './bundle.jsx'
     },
     output: {
         path: constants.output,
@@ -12,7 +12,7 @@ const config = {
     },
     module: {
         loaders: [{
-            test: /\.js$/,
+            test: /\.jsx?$/,
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
@@ -22,6 +22,9 @@ const config = {
                 ]
             }
         }]
+    },
+    resolve: {
+        extensions: [".jsx", ".js", ".json"]
     },
     plugins: []
 };
