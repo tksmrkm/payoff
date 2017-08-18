@@ -6,8 +6,6 @@ import { disabled } from '../../styles';
 import { toggleUser, removeUser } from '../../actions';
 
 const ListNode = ({ user, onClickToggle, onClickRemove }) => {
-    console.log(user);
-
     const handleToggle = (event) => {
         onClickToggle(user.id);
     };
@@ -35,7 +33,7 @@ const ListNode = ({ user, onClickToggle, onClickRemove }) => {
         >
             <ListItemText
                 primary={user.name}
-                secondary={`出費: ${expense}, 清算額: ${gain}`}
+                secondary={`出費: ${expense} | 清算額: ${gain}`}
             />
             <ListItemSecondaryAction>
                 <IconButton

@@ -24,8 +24,26 @@ const UserList = ({users, onClickToggle}) => {
     )
 };
 
-const mapStateToProps = (state) => {
-    return {users: state.users};
+const mapStateToProps = ({users, dealings}) => {
+    const changed = users
+    .map(user => {
+        user.expense = dealings
+        .map(dealing => {
+            if (dealing.user_id === user.id) {
+                return parseInt(dealing.value);
+            }
+            return 0;
+        })
+        .reduce((prev, current) => {
+            return prev + current;
+        });
+
+        return user;
+    });
+
+    return {
+        users: changed
+    };
 };
 
 const mapDispatchToProps = dispatch => {
