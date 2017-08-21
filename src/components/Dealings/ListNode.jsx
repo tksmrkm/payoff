@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListItem, ListItemSecondaryAction, ListItemText, IconButton } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
-import { disabled } from '../../styles';
 import { removeDealing } from '../../actions';
 
 const ListNode = ({ dealing,  onClickRemove }) => {

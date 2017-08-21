@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addUser, resetUsers } from '../../actions';
-import { row, wrapper } from '../../styles';
-import { TextField, Button } from 'material-ui';
+import { wrapper } from '../../styles';
+import { TextField, Button, Grid } from 'material-ui';
 
 const AddForm = ({onSubmitAddUser, onResetUsers}) => {
     let input;
@@ -17,29 +17,32 @@ const AddForm = ({onSubmitAddUser, onResetUsers}) => {
                 onSubmitAddUser(input.value);
                 input.value = '';
             }}
-            style={wrapper}
         >
-            <TextField
-                inputRef={node => {
-                    input = node;
-                }}
-                label="Name"
-                fullWidth={true}
-                required={true}
-                style={row}
-            />
-            <Button
-                color="primary"
-                raised={true}
-                style={row}
-                type="submit"
-            >Add</Button>
-            <Button
-                color="default"
-                raised={true}
-                style={row}
-                onClick={onResetUsers}
-            >Reset</Button>
+            <Grid container={true}>
+                <Grid item xs={12}>
+                    <TextField
+                        inputRef={node => {
+                            input = node;
+                        }}
+                        label="Name"
+                        fullWidth={true}
+                        required={true}
+                    />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Button
+                        color="primary"
+                        raised={true}
+                        type="submit"
+                    >Add</Button>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Button
+                        color="default"
+                        onClick={onResetUsers}
+                    >Reset</Button>
+                </Grid>
+            </Grid>
         </form>
     );
 };

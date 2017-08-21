@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addDealing, toggleSelectUserMenu, resetDealings } from '../../actions';
-import { row, wrapper } from '../../styles';
-import { TextField, Button, Menu, MenuItem } from 'material-ui';
+import { TextField, Button, Menu, MenuItem, Grid } from 'material-ui';
 
 const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus}) => {
     let name, value, ignore_users, selected_user, ignored;
@@ -35,63 +34,70 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
                 onResetIgnored();
                 ignore_users = [];
             }}
-            style={wrapper}
         >
-            <select
-                ref={node => {
-                    selected_user = node;
-                }}
-            >
-                <option value="0">▼ 選択 ▼</option>
-                {users.map((user) => 
-                    <option key={user.id} value={user.id}>{user.name}</option>
-                )}
-            </select>
-            <TextField
-                inputRef={node => {
-                    name = node;
-                }}
-                label="Name"
-                fullWidth={true}
-                required={true}
-                style={row}
-            />
-            <TextField
-                inputRef={node => {
-                    value = node;
-                }}
-                label="Value"
-                fullWidth={true}
-                required={true}
-                style={row}
-                type="number"
-            />
-            <div style={row}>
-                <select
-                    ref={node => {
-                        ignored = node;
-                    }}
-                    onChange={event => {
-                        onChangeIgnored(ignored.options);
-                    }}
-                    multiple
-                >
-                    {users.map((user) => 
-                        <option key={user.id} value={user.id}>{user.name}</option>
-                    )}
-                </select>
-            </div>
-            <Button
-                color="accent"
-                raised={true}
-                style={row}
-                type="submit"
-            >Add</Button>
-            <Button
-                color="default"
-                style={row}
-                onClick={onResetDealings}
-            >Reset</Button>
+            <Grid container>
+                <Grid item xs={12}>
+                    <select
+                        ref={node => {
+                            selected_user = node;
+                        }}
+                    >
+                        <option value="0">▼ 選択 ▼</option>
+                        {users.map((user) => 
+                            <option key={user.id} value={user.id}>{user.name}</option>
+                        )}
+                    </select>
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        inputRef={node => {
+                            name = node;
+                        }}
+                        label="Name"
+                        fullWidth={true}
+                        required={true}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField
+                        inputRef={node => {
+                            value = node;
+                        }}
+                        label="Value"
+                        fullWidth={true}
+                        required={true}
+                        type="number"
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <select
+                        ref={node => {
+                            ignored = node;
+                        }}
+                        onChange={event => {
+                            onChangeIgnored(ignored.options);
+                        }}
+                        multiple
+                    >
+                        {users.map((user) => 
+                            <option key={user.id} value={user.id}>{user.name}</option>
+                        )}
+                    </select>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Button
+                        color="accent"
+                        raised={true}
+                        type="submit"
+                    >Add</Button>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Button
+                        color="default"
+                        onClick={onResetDealings}
+                    >Reset</Button>
+                </Grid>
+            </Grid>
         </form>
     );
 };
