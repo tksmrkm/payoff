@@ -6,8 +6,8 @@ import DealList from './DealList';
 const Dealings = () => {
     return (
         <div>
-            <DealList />
             <AddForm />
+            <DealList />
         </div>
     );
 };

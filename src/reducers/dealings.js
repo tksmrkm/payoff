@@ -8,7 +8,7 @@ export default (state = [], action) => {
                     user_id: action.user_id,
                     name: action.name,
                     value: action.value,
-                    ignore_users: []
+                    ignore_users: action.ignore_users
                 }
             ];
         case 'REMOVE_DEALING':

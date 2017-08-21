@@ -6,8 +6,8 @@ import AddForm from './AddForm';
 const Users = () => {
     return (
         <div>
-            <UserList />
             <AddForm />
+            <UserList />
         </div>
     );
 };

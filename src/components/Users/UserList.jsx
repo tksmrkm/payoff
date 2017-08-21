@@ -31,28 +31,44 @@ const UserList = ({users, onClickToggle}) => {
 const mapStateToProps = ({users, dealings}) => {
     const changed = users
     .map(user => {
-        const total_to_pay = dealings
+        const userobj = dealings
         .map(dealing => {
-            if (dealing.ignore_users.includes(user.id)) {
-                return 0;
-            }
-
-            return parseInt(dealing.value);
-        })
-        .reduce(sum, 0);
-
-        const expense = dealings
-        .map(dealing => {
+            const retval = {
+                expense: 0,
+                payment: 0
+            };
+            const value = parseInt(dealing.value);
             if (dealing.user_id === user.id) {
-                return parseInt(dealing.value);
+                retval.expense = value;
             }
-            return 0;
+
+            retval.payment = value / (users.length - dealing.ignore_users.length);
+
+            if (dealing.ignore_users.includes(user.id)) {
+                retval.payment = 0;
+            }
+            return retval;
         })
-        .reduce(sum, 0);
+        .reduce((prev, current) => {
+            if (current) {
+                return {
+                    expense: prev.expense + current.expense,
+                    payment: prev.payment + current.payment
+                };
+            }
 
-        user.expense = expense;
+            return {
+                expense: 0,
+                payment: 0
+            };
+        }, {
+            expense: 0,
+            payment: 0
+        });
 
-        user.gain = (total_to_pay / users.length) - expense;
+        user.expense = userobj.expense;
+
+        user.gain = userobj.payment - userobj.expense;
 
         return user;
     });

@@ -5,16 +5,15 @@ import { row, wrapper } from '../../styles';
 import { TextField, Button, Menu, MenuItem } from 'material-ui';
 
 const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, users, menus}) => {
-    let name, value, ignore_users, selected_user_node, selected_user, ignored, ignored_node;
+    let name, value, ignore_users, selected_user, ignored;
 
     const onChangeIgnored = options => {
         const list = [];
         for (let i of options) {
-            if (options.selected) {
+            if (i.selected) {
                 list.push(i.value);
             }
         }
-        console.log(list);
         ignore_users = list;
     };
     const onResetIgnored = () => {
@@ -30,11 +29,11 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, users, menus}) => 
                 if (!name.value.trim() || !value.value.trim()) {
                     return;
                 }
-                onSubmitAddDealing(selected_user.value, name.value, value.value, ignored);
-                selected_user.value = '';
+                onSubmitAddDealing(selected_user.value, name.value, value.value, ignore_users);
                 name.value = '';
                 value.value = '';
                 onResetIgnored();
+                ignore_users = [];
             }}
             style={wrapper}
         >
