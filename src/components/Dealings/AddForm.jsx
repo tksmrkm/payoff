@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addDealing, toggleSelectUserMenu } from '../../actions';
+import { addDealing, toggleSelectUserMenu, resetDealings } from '../../actions';
 import { row, wrapper } from '../../styles';
 import { TextField, Button, Menu, MenuItem } from 'material-ui';
 
-const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, users, menus}) => {
+const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus}) => {
     let name, value, ignore_users, selected_user, ignored;
 
     const onChangeIgnored = options => {
@@ -87,6 +87,11 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, users, menus}) => 
                 style={row}
                 type="submit"
             >Add</Button>
+            <Button
+                color="default"
+                style={row}
+                onClick={onResetDealings}
+            >Reset</Button>
         </form>
     );
 };
@@ -105,6 +110,11 @@ const mapDispatchToProps = dispatch => {
         },
         onToggleSelectUserMenu: (state) => {
             dispatch(toggleSelectUserMenu(state));
+        },
+        onResetDealings: () => {
+            if (confirm('Reset Dealings')) {
+                dispatch(resetDealings());
+            }
         }
     };
 };

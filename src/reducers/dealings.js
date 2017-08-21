@@ -26,6 +26,8 @@ export default (state = [], action) => {
 
                 return dealing;
             });
+        case 'RESET_DEALINGS':
+            return [];
         default:
             return state;
     }

@@ -43,6 +43,12 @@ export function editUser(id, name) {
     };
 };
 
+export function resetUsers() {
+    return {
+        type: 'RESET_USERS'
+    };
+};
+
 export function switchTabs(id) {
     return {
         type: 'SWITCH_TABS',
@@ -77,6 +83,12 @@ export function editDealing(id, user_id, name, value, ignore_users) {
         ignore_users
     };
 };
+
+export function resetDealings() {
+    return {
+        type: 'RESET_DEALINGS'
+    };
+}
 
 export function toggleSelectUserMenu(state) {
     return {

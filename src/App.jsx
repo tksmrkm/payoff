@@ -5,7 +5,6 @@ import Tabs from './components/Tabs';
 import Dealings from './components/Dealings';
 
 export default function App() {
-    console.count('Render');
     return (
         <Tabs>
             <Users />

@@ -22,6 +22,8 @@ export default (state = [], action) => {
             return state.filter(user => {
                 return user.id !== action.id;
             });
+        case 'RESET_USERS':
+            return [];
         default:
             return state;
     }

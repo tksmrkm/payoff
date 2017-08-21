@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addUser } from '../../actions';
+import { addUser, resetUsers } from '../../actions';
 import { row, wrapper } from '../../styles';
 import { TextField, Button } from 'material-ui';
 
-const AddForm = ({onSubmitAddUser}) => {
+const AddForm = ({onSubmitAddUser, onResetUsers}) => {
     let input;
 
     return (
@@ -33,7 +33,13 @@ const AddForm = ({onSubmitAddUser}) => {
                 raised={true}
                 style={row}
                 type="submit"
-            >Add User</Button>
+            >Add</Button>
+            <Button
+                color="default"
+                raised={true}
+                style={row}
+                onClick={onResetUsers}
+            >Reset</Button>
         </form>
     );
 };
@@ -42,6 +48,11 @@ const mapDispatchToProps = dispatch => {
     return {
         onSubmitAddUser: name => {
             dispatch(addUser(name));
+        },
+        onResetUsers: () => {
+            if (confirm('Reset Users')) {
+                dispatch(resetUsers());
+            }
         }
     };
 };
