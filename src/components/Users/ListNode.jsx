@@ -1,11 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListItem, ListItemSecondaryAction, ListItemText, IconButton } from 'material-ui';
+import {
+    ListItem,
+    ListItemSecondaryAction,
+    ListItemText,
+    IconButton,
+    Checkbox
+} from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
-import { disabled } from '../../styles';
 import { toggleUser, removeUser } from '../../actions';
 
-const ListNode = ({ user, onClickToggle, onClickRemove }) => {
+const ListNode = ({ key, user_id, users, onClickToggle, onClickRemove }) => {
+    let check;
+
+    const user = users.filter(user => {
+        return user.id === user_id;
+    }).pop();
+
     const handleToggle = (event) => {
         onClickToggle(user.id);
     };
@@ -20,8 +31,6 @@ const ListNode = ({ user, onClickToggle, onClickRemove }) => {
         return String(num).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
     };
 
-    const style = user.done ? disabled: {};
-
     const expense = localeString(user.expense);
     const gain = localeString(user.gain);
 
@@ -29,8 +38,14 @@ const ListNode = ({ user, onClickToggle, onClickRemove }) => {
         <ListItem
             button
             onClick={handleToggle}
-            style={style}
         >
+            <Checkbox
+                onChange={handleToggle}
+                checked={user.done}
+                inputRef={node => {
+                    check = node;
+                }}
+            />
             <ListItemText
                 primary={user.name}
                 secondary={`出費: ${expense} | 清算額: ${gain}`}
@@ -47,6 +62,12 @@ const ListNode = ({ user, onClickToggle, onClickRemove }) => {
     );
 };
 
+const mapStateToProps = ({users}) => {
+    return {
+        users
+    };
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         onClickToggle: id => {
@@ -58,4 +79,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(ListNode);
+export default connect(mapStateToProps, mapDispatchToProps)(ListNode);

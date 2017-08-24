@@ -15,7 +15,7 @@ const UserList = ({users, onClickToggle}) => {
     const nodes = users.map(user => {
         return (
             <ListNode
-                user={user}
+                user_id={user.id}
                 key={user.id}
             />
         );
