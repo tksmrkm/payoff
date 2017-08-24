@@ -4,16 +4,14 @@ import { addDealing, toggleSelectUserMenu, resetDealings } from '../../actions';
 import { TextField, Button, Menu, MenuItem, Grid } from 'material-ui';
 
 const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus}) => {
-    let name, value, ignore_users, selected_user, ignored;
+    let name, value, ignore_users = [], selected_user, ignored;
 
     const onChangeIgnored = options => {
-        const list = [];
         for (let i of options) {
             if (i.selected) {
-                list.push(i.value);
+                ignore_users.push(i.value);
             }
         }
-        ignore_users = list;
     };
     const onResetIgnored = () => {
         for (let i of ignored.options) {
