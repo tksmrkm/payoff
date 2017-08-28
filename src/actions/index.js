@@ -96,3 +96,24 @@ export function toggleSelectUserMenu(state) {
         state
     };
 };
+
+export function selectIgnoreUsers(users) {
+    return {
+        type: 'SELECT_IGNORE_USERS',
+        users
+    }
+};
+
+export function selectUser(user) {
+    return {
+        type: 'SELECT_USER',
+        user
+    };
+};
+
+export function toggleUserSelector(state) {
+    return {
+        type: 'TOGGLE_USER_SELECTOR',
+        state
+    };
+};

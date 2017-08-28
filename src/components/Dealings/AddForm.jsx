@@ -1,7 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addDealing, toggleSelectUserMenu, resetDealings } from '../../actions';
-import { TextField, Button, Menu, MenuItem, Grid } from 'material-ui';
+import {
+    TextField,
+    Button,
+    Menu,
+    MenuItem,
+    Grid
+} from 'material-ui';
+import SelectUser from './SelectUser';
 
 const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus}) => {
     let name, value, ignore_users = [], selected_user, ignored;
@@ -45,6 +52,7 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
                             <option key={user.id} value={user.id}>{user.name}</option>
                         )}
                     </select>
+                    <SelectUser users={users} />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
