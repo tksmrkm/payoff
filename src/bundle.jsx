@@ -6,7 +6,7 @@ import App from './App';
 import reducer from './reducers';
 import persistState from 'redux-localstorage'
 
-const enhancer = compose(persistState(null, {key: 'payoff'}));
+const enhancer = compose(persistState(['users', 'dealings'], {key: 'payoff'}));
 
 let store = createStore(reducer, enhancer);
 

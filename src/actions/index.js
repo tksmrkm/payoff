@@ -97,11 +97,25 @@ export function toggleSelectUserMenu(state) {
     };
 };
 
-export function selectIgnoreUsers(users) {
+export function bindSelectUserElement(element) {
     return {
-        type: 'SELECT_IGNORE_USERS',
-        users
-    }
+        type: 'BIND_SELECT_USER_ELEMENT',
+        element
+    };
+};
+
+export function bindNameElement(element) {
+    return {
+        type: 'BIND_NAME_ELEMENT',
+        element
+    };
+};
+
+export function bindValueElement(element) {
+    return {
+        type: 'BIND_VALUE_ELEMENT',
+        element
+    };
 };
 
 export function selectUser(user) {
@@ -111,9 +125,14 @@ export function selectUser(user) {
     };
 };
 
-export function toggleUserSelector(state) {
+export function openUserSelector() {
     return {
-        type: 'TOGGLE_USER_SELECTOR',
-        state
+        type: 'OPEN_USER_SELECTOR'
+    };
+};
+
+export function closeUserSelector() {
+    return {
+        type: 'CLOSE_USER_SELECTOR'
     };
 };

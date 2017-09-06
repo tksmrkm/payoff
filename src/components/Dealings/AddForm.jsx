@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addDealing, toggleSelectUserMenu, resetDealings } from '../../actions';
+import {
+    addDealing,
+    toggleSelectUserMenu,
+    resetDealings,
+    bindNameElement,
+    bindValueElement
+} from '../../actions';
 import {
     TextField,
     Button,
@@ -8,10 +14,10 @@ import {
     MenuItem,
     Grid
 } from 'material-ui';
-import SelectUser from './SelectUser';
+import SelectUser from '../../containers/SelectUser';
 
-const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus}) => {
-    let name, value, ignore_users = [], selected_user, ignored;
+const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus, add_dealing_form, handleBindNameElement, handleBindValueElement}) => {
+    let ignore_users = [], ignored;
 
     const onChangeIgnored = options => {
         for (let i of options) {
@@ -30,34 +36,25 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
         <form
             onSubmit={e => {
                 e.preventDefault();
-                if (!name.value.trim() || !value.value.trim()) {
+                if (!add_dealing_form.name_element.value.trim() || !add_dealing_form.value_element.value.trim() || !add_dealing_form.selected_user) {
+                    console.warn('Invalid data', add_dealing_form);
                     return;
                 }
-                onSubmitAddDealing(selected_user.value, name.value, value.value, ignore_users);
-                name.value = '';
-                value.value = '';
+                onSubmitAddDealing(add_dealing_form.selected_user, add_dealing_form.name_element.value, add_dealing_form.value_element.value, ignore_users);
+                add_dealing_form.name_element.value = '';
+                add_dealing_form.value_element.value = '';
                 onResetIgnored();
                 ignore_users = [];
             }}
         >
             <Grid container>
                 <Grid item xs={12}>
-                    <select
-                        ref={node => {
-                            selected_user = node;
-                        }}
-                    >
-                        <option value="0">▼ 選択 ▼</option>
-                        {users.map((user) => 
-                            <option key={user.id} value={user.id}>{user.name}</option>
-                        )}
-                    </select>
-                    <SelectUser users={users} />
+                    <SelectUser />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
                         inputRef={node => {
-                            name = node;
+                            handleBindNameElement(node);
                         }}
                         label="Name"
                         fullWidth={true}
@@ -67,7 +64,7 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
                 <Grid item xs={12}>
                     <TextField
                         inputRef={node => {
-                            value = node;
+                            handleBindValueElement(node);
                         }}
                         label="Value"
                         fullWidth={true}
@@ -108,10 +105,11 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
     );
 };
 
-const mapStateToProps = ({users, menus}) => {
+const mapStateToProps = ({users, menus, add_dealing_form}) => {
     return {
         users,
-        menus
+        menus,
+        add_dealing_form
     };
 }
 
@@ -127,8 +125,14 @@ const mapDispatchToProps = dispatch => {
             if (confirm('Reset Dealings')) {
                 dispatch(resetDealings());
             }
+        },
+        handleBindNameElement: (element) => {
+            dispatch(bindNameElement(element));
+        },
+        handleBindValueElement: (element) => {
+            dispatch(bindValueElement(element));
         }
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
+export default connect(mapStateToProps, mapDispatchToProps, null, {withRef: true})(AddForm);
