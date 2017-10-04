@@ -7,45 +7,43 @@ import {
     closeUserSelector
 } from '../actions';
 import {
-    List,
-    ListItem,
-    ListItemText,
     Menu,
     MenuItem,
     Button
 } from 'material-ui';
 
-const SelectUser = ({users, add_dealing_form, handleOpenUserSelector, handleCloseUserSelector, handleSelectUser, handleBindElement}) => {
-    const userList = {};
-    const handleOnClick = event => {
-        handleBindElement(event.currentTarget);
-        handleOpenUserSelector();
-    };
-    let open = add_dealing_form.open;
+const SelectUser = ({users, add_dealing_form, handleOpenUserSelector, handleCloseUserSelector, handleSelectUser, handleBindSelectUserElement}) => {
+    let nodes = users.map(user => (
+        <MenuItem
+            key={user.id}
+            selected={user.id === add_dealing_form.selected_user}
+            onClick={event => {
+                handleSelectUser(user.id);
+                handleCloseUserSelector();
+            }}
+        >
+            {user.name}
+        </MenuItem>
+    ));
+
+    let selected_user = users.filter((user) => {
+        return add_dealing_form.selected_user === user.id;
+    });
+
+    let button_name = selected_user.length ? selected_user.pop().name: 'Select';
 
     return (
         <div>
-            <List>
-                <ListItem
-                    button
-                    aria-haspopup="true"
-                    aria-controls="lock-menu"
-                    aria-label="Select"
-                    onClick={handleOnClick}
-                >
-                    <ListItemText
-                        primary={userList[add_dealing_form.selected_user] ? userList[add_dealing_form.selected_user] : '-'}
-                        secondary="Select"
-                    />
-                </ListItem>
-            </List>
             <Button
                 aria-owns={add_dealing_form.open ? 'simple-menu': null}
                 aria-haspopup="true"
-                onClick={handleOnClick}
+                onClick={event => {
+                    handleBindSelectUserElement(event.currentTarget);
+                    handleOpenUserSelector();
+                }}
                 raised
             >
-                {userList[add_dealing_form.selected_user] ? userList[add_dealing_form.selected_user] : 'Select'}
+                {button_name}
             </Button>
             <Menu
                 id="lock-menu"
@@ -53,21 +51,7 @@ const SelectUser = ({users, add_dealing_form, handleOpenUserSelector, handleClos
                 open={add_dealing_form.open}
                 onRequestClose={handleCloseUserSelector}
             >
-                {users.map((user, index) => {
-                    userList[user.id] = user.name;
-                    return (
-                        <MenuItem
-                            key={user.id}
-                            selected={user.id === add_dealing_form.selected_user}
-                            onClick={event => {
-                                handleSelectUser(user.id);
-                                handleCloseUserSelector();
-                            }}
-                        >
-                            {user.name}
-                        </MenuItem>
-                    );
-                })}
+                {nodes}
             </Menu>
         </div>
     );
@@ -91,7 +75,7 @@ const mapDispatchToProps = dispatch => {
         handleSelectUser: (user) => {
             dispatch(selectUser(user));
         },
-        handleBindElement: (element) => {
+        handleBindSelectUserElement: (element) => {
             dispatch(bindSelectUserElement(element));
         }
     };

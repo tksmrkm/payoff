@@ -9,23 +9,29 @@ const initState = {
 export default (state = initState, action) => {
     switch (action.type) {
         case 'BIND_SELECT_USER_ELEMENT':
-            state.select_user_element = action.element;
-            return state;
+            return Object.assign({}, state, {
+                select_user_element: action.element
+            });
         case 'BIND_NAME_ELEMENT':
-            state.name_element = action.element;
-            return state;
+            return Object.assign({}, state, {
+                name_element: action.element
+            });
         case 'BIND_VALUE_ELEMENT':
-            state.value_element = action.element;
-            return state;
+            return Object.assign({}, state, {
+                value_element: action.element
+            });
         case 'SELECT_USER':
-            state.selected_user = action.user;
-            return state;
+            return Object.assign({}, state, {
+                selected_user: action.user
+            });
         case 'OPEN_USER_SELECTOR':
-            state.open = true;
-            return state;
+            return Object.assign({}, state, {
+                open: true
+            });
         case 'CLOSE_USER_SELECTOR':
-            state.open = false;
-            return state;
+            return Object.assign({}, state, {
+                open: false
+            });
         default:
             return state;
     }
