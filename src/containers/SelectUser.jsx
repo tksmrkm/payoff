@@ -1,59 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-    bindSelectUserElement,
-    selectUser,
-    openUserSelector,
-    closeUserSelector
+    selectUser
 } from '../actions';
 import {
-    Menu,
-    MenuItem,
-    Button
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem
 } from 'material-ui';
 
-const SelectUser = ({users, add_dealing_form, handleOpenUserSelector, handleCloseUserSelector, handleSelectUser, handleBindSelectUserElement}) => {
+const SelectUser = ({users, add_dealing_form, handleSelectUser}) => {
     let nodes = users.map(user => (
         <MenuItem
             key={user.id}
+            value={user.id}
             selected={user.id === add_dealing_form.selected_user}
-            onClick={event => {
-                handleSelectUser(user.id);
-                handleCloseUserSelector();
-            }}
         >
             {user.name}
         </MenuItem>
     ));
 
-    let selected_user = users.filter((user) => {
-        return add_dealing_form.selected_user === user.id;
-    });
-
-    let button_name = selected_user.length ? selected_user.pop().name: 'Select';
+    const id = "SelectDealingUser";
 
     return (
-        <div>
-            <Button
-                aria-owns={add_dealing_form.open ? 'simple-menu': null}
-                aria-haspopup="true"
-                onClick={event => {
-                    handleBindSelectUserElement(event.currentTarget);
-                    handleOpenUserSelector();
-                }}
-                raised
-            >
-                {button_name}
-            </Button>
-            <Menu
-                id="lock-menu"
-                anchorEl={add_dealing_form.select_user_element}
-                open={add_dealing_form.open}
-                onRequestClose={handleCloseUserSelector}
+        <FormControl
+            fullWidth={true}
+        >
+            <InputLabel htmlFor={id}>Select</InputLabel>
+            <Select
+                id={id}
+                value={add_dealing_form.selected_user}
+                onChange={handleSelectUser}
             >
                 {nodes}
-            </Menu>
-        </div>
+            </Select>
+        </FormControl>
     );
 };
 
@@ -66,17 +48,8 @@ const mapStateToProps = ({users, add_dealing_form}) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleOpenUserSelector: () => {
-            dispatch(openUserSelector());
-        },
-        handleCloseUserSelector: () => {
-            dispatch(closeUserSelector());
-        },
-        handleSelectUser: (user) => {
-            dispatch(selectUser(user));
-        },
-        handleBindSelectUserElement: (element) => {
-            dispatch(bindSelectUserElement(element));
+        handleSelectUser: (event) => {
+            dispatch(selectUser(event.target.value));
         }
     };
 };

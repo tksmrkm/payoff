@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
     addDealing,
-    toggleSelectUserMenu,
     resetDealings,
     bindNameElement,
     bindValueElement,
@@ -18,7 +17,7 @@ import {
 import SelectUser from '../../containers/SelectUser';
 import MultipleSelector from '../../containers/MultipleSelector';
 
-const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus, add_dealing_form, handleBindNameElement, handleBindValueElement, handleResetIgnoreUsers}) => {
+const AddForm = ({onSubmitAddDealing, onResetDealings, users, menus, add_dealing_form, handleBindNameElement, handleBindValueElement, handleResetIgnoreUsers}) => {
     return (
         <form
             onSubmit={e => {
@@ -91,9 +90,6 @@ const mapDispatchToProps = dispatch => {
     return {
         onSubmitAddDealing: (user_id, name, value, ignore_users) => {
             dispatch(addDealing(user_id, name, value, ignore_users));
-        },
-        onToggleSelectUserMenu: (state) => {
-            dispatch(toggleSelectUserMenu(state));
         },
         onResetDealings: () => {
             if (confirm('Reset Dealings')) {

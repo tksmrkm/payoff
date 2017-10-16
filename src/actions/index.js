@@ -90,20 +90,6 @@ export function resetDealings() {
     };
 }
 
-export function toggleSelectUserMenu(state) {
-    return {
-        type: 'TOGGLE_SELECT_USER_MENU',
-        state
-    };
-};
-
-export function bindSelectUserElement(element) {
-    return {
-        type: 'BIND_SELECT_USER_ELEMENT',
-        element
-    };
-};
-
 export function bindNameElement(element) {
     return {
         type: 'BIND_NAME_ELEMENT',
@@ -122,18 +108,6 @@ export function selectUser(user) {
     return {
         type: 'SELECT_USER',
         user
-    };
-};
-
-export function openUserSelector() {
-    return {
-        type: 'OPEN_USER_SELECTOR'
-    };
-};
-
-export function closeUserSelector() {
-    return {
-        type: 'CLOSE_USER_SELECTOR'
     };
 };
 
