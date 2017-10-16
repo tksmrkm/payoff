@@ -3,7 +3,8 @@ const initState = {
     name_element: null,
     value_element: null,
     selected_user: '',
-    open: false
+    open: false,
+    ignore_users: []
 };
 
 export default (state = initState, action) => {
@@ -32,6 +33,10 @@ export default (state = initState, action) => {
             return Object.assign({}, state, {
                 open: false
             });
+        case 'CHOOSE_IGNORE_USERS':
+            const copied = Object.assign({}, state);
+            copied.ignore_users = action.users;
+            return copied;
         default:
             return state;
     }

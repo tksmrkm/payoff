@@ -5,7 +5,8 @@ import {
     toggleSelectUserMenu,
     resetDealings,
     bindNameElement,
-    bindValueElement
+    bindValueElement,
+    chooseIgnoreUsers
 } from '../../actions';
 import {
     TextField,
@@ -15,23 +16,9 @@ import {
     Grid
 } from 'material-ui';
 import SelectUser from '../../containers/SelectUser';
+import MultipleSelector from '../../containers/MultipleSelector';
 
-const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus, add_dealing_form, handleBindNameElement, handleBindValueElement}) => {
-    let ignore_users = [], ignored;
-
-    const onChangeIgnored = options => {
-        for (let i of options) {
-            if (i.selected) {
-                ignore_users.push(i.value);
-            }
-        }
-    };
-    const onResetIgnored = () => {
-        for (let i of ignored.options) {
-            i.selected = false;
-        }
-    };
-
+const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, users, menus, add_dealing_form, handleBindNameElement, handleBindValueElement, handleResetIgnoreUsers}) => {
     return (
         <form
             onSubmit={e => {
@@ -40,11 +27,10 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
                     console.warn('Invalid data', add_dealing_form);
                     return;
                 }
-                onSubmitAddDealing(add_dealing_form.selected_user, add_dealing_form.name_element.value, add_dealing_form.value_element.value, ignore_users);
+                onSubmitAddDealing(add_dealing_form.selected_user, add_dealing_form.name_element.value, add_dealing_form.value_element.value, add_dealing_form.ignore_users);
                 add_dealing_form.name_element.value = '';
                 add_dealing_form.value_element.value = '';
-                onResetIgnored();
-                ignore_users = [];
+                handleResetIgnoreUsers();
             }}
         >
             <Grid container>
@@ -56,7 +42,7 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
                         inputRef={node => {
                             handleBindNameElement(node);
                         }}
-                        label="Name"
+                        label="Title"
                         fullWidth={true}
                         required={true}
                     />
@@ -73,19 +59,7 @@ const AddForm = ({onSubmitAddDealing, onToggleSelectUserMenu, onResetDealings, u
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <select
-                        ref={node => {
-                            ignored = node;
-                        }}
-                        onChange={event => {
-                            onChangeIgnored(ignored.options);
-                        }}
-                        multiple
-                    >
-                        {users.map((user) => 
-                            <option key={user.id} value={user.id}>{user.name}</option>
-                        )}
-                    </select>
+                    <MultipleSelector />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Button
@@ -131,6 +105,9 @@ const mapDispatchToProps = dispatch => {
         },
         handleBindValueElement: (element) => {
             dispatch(bindValueElement(element));
+        },
+        handleResetIgnoreUsers: () => {
+            dispatch(chooseIgnoreUsers([]));
         }
     };
 };

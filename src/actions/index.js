@@ -136,3 +136,10 @@ export function closeUserSelector() {
         type: 'CLOSE_USER_SELECTOR'
     };
 };
+
+export function chooseIgnoreUsers(users) {
+    return {
+        type: 'CHOOSE_IGNORE_USERS',
+        users
+    };
+}
