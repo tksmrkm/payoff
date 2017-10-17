@@ -15,10 +15,7 @@ const Tabs = ({tabs, onSwitchTabs, children}) => {
 
     return (
         <div>
-            <main style={main}>
-                {children[tabs]}
-            </main>
-            <footer>
+            <header>
                 <BaseTabs
                     centered={true}
                     fullWidth={true}
@@ -32,7 +29,10 @@ const Tabs = ({tabs, onSwitchTabs, children}) => {
                         label="Dealings"
                     />
                 </BaseTabs>
-            </footer>
+            </header>
+            <main style={main}>
+                {children[tabs]}
+            </main>
         </div>
     );
 };
