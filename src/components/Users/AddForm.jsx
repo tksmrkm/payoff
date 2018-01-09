@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { addUser, resetUsers } from '~/actions';
 import { wrapper } from '~/styles';
 import { TextField, Button, Grid } from 'material-ui';
 
@@ -47,17 +45,4 @@ const AddForm = ({onSubmitAddUser, onResetUsers}) => {
     );
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onSubmitAddUser: name => {
-            dispatch(addUser(name));
-        },
-        onResetUsers: () => {
-            if (confirm('Reset Users')) {
-                dispatch(resetUsers());
-            }
-        }
-    };
-};
-
-export default connect(null, mapDispatchToProps)(AddForm);
+export default AddForm;

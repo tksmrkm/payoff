@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import UserList from './UserList';
-import AddForm from './AddForm';
+import UserList from '~/containers/Users/UserList';
+import AddForm from '~/containers/Users/AddForm';
 
 const Users = () => {
     return (
@@ -12,4 +11,4 @@ const Users = () => {
     );
 };
 
-export default connect()(Users);
+export default Users;

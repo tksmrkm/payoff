@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import {
     ListItem,
     ListItemSecondaryAction,
@@ -8,7 +7,6 @@ import {
     Checkbox
 } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
-import { toggleUser, removeUser } from '~/actions';
 
 const ListNode = ({ key, user_id, users, onClickToggle, onClickRemove }) => {
     let check;
@@ -62,21 +60,4 @@ const ListNode = ({ key, user_id, users, onClickToggle, onClickRemove }) => {
     );
 };
 
-const mapStateToProps = ({users}) => {
-    return {
-        users
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onClickToggle: id => {
-            dispatch(toggleUser(id))
-        },
-        onClickRemove: id => {
-            dispatch(removeUser(id))
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListNode);
+export default ListNode;
