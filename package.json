@@ -23,6 +23,7 @@
   "scripts": {
     "js:build": "webpack -p --config config/product.webpack.config.js",
     "js:watch": "webpack -w --config config/dev.webpack.config.js",
-    "build": "rm -rf dist && yarn run js:build && cp -r src/images dist/images"
+    "build": "rm -rf dist && yarn run js:build && cp -r src/images dist/images",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   }
 }
