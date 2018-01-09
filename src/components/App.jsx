@@ -1,6 +1,6 @@
 import React from 'react';
 import Users from './Users';
-import Tabs from './Tabs';
+import Tabs from '~/containers/Tabs';
 import Dealings from './Dealings';
 import Navbar from './Navbar';
 import {

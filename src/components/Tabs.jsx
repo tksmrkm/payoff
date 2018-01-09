@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { switchTabs } from '~/actions';
 import { main } from '~/styles';
 import {
     AppBar,
@@ -37,16 +35,4 @@ const Tabs = ({tabs, onSwitchTabs, children}) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {tabs: state.tabs};
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onSwitchTabs: id => {
-            dispatch(switchTabs(id));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
+export default Tabs;
