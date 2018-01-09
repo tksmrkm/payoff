@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { switchTabs } from '../actions';
-import { main } from '../styles';
+import { switchTabs } from '~/actions';
+import { main } from '~/styles';
 import {
     AppBar,
     Tab,

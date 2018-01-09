@@ -8,7 +8,7 @@ import {
     Checkbox
 } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
-import { toggleUser, removeUser } from '../../actions';
+import { toggleUser, removeUser } from '~/actions';
 
 const ListNode = ({ key, user_id, users, onClickToggle, onClickRemove }) => {
     let check;

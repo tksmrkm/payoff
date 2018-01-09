@@ -2,7 +2,7 @@ import React from 'react';
 import ListNode from './ListNode';
 import { connect } from 'react-redux';
 import List from 'material-ui/List';
-import { wrapper } from '../../styles';
+import { wrapper } from '~/styles';
 
 const DealList = ({dealings}) => {
     const nodes = dealings.map(dealing => {

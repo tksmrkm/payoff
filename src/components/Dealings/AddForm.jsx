@@ -6,7 +6,7 @@ import {
     bindNameElement,
     bindValueElement,
     chooseIgnoreUsers
-} from '../../actions';
+} from '~/actions';
 import {
     TextField,
     Button,
@@ -14,8 +14,8 @@ import {
     MenuItem,
     Grid
 } from 'material-ui';
-import SelectUser from '../../containers/SelectUser';
-import MultipleSelector from '../../containers/MultipleSelector';
+import SelectUser from '~/containers/SelectUser';
+import MultipleSelector from '~/containers/MultipleSelector';
 
 const AddForm = ({onSubmitAddDealing, onResetDealings, users, menus, add_dealing_form, handleBindNameElement, handleBindValueElement, handleResetIgnoreUsers}) => {
     return (

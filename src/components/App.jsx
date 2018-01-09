@@ -1,9 +1,8 @@
 import React from 'react';
-import { switchTabs } from './actions';
-import Users from './components/Users';
-import Tabs from './components/Tabs';
-import Dealings from './components/Dealings';
-import Navbar from './components/Navbar';
+import Users from './Users';
+import Tabs from './Tabs';
+import Dealings from './Dealings';
+import Navbar from './Navbar';
 import {
     Grid
 } from 'material-ui';

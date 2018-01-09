@@ -1,9 +1,9 @@
 import React from 'react';
 import ListNode from './ListNode';
 import { connect } from 'react-redux';
-import { toggleUser } from '../../actions';
+import { toggleUser } from '~/actions';
 import List from 'material-ui/List';
-import { wrapper } from '../../styles';
+import { wrapper } from '~/styles';
 
 const sum = (prev, current) => {
     return prev + current;

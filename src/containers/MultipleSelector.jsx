@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
     chooseIgnoreUsers
-} from '../actions';
+} from '~/actions';
 import {
     FormControl,
     InputLabel,

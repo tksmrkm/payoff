@@ -24,7 +24,10 @@ const config = {
         }]
     },
     resolve: {
-        extensions: [".jsx", ".js", ".json"]
+        extensions: [".jsx", ".js", ".json"],
+        alias: {
+            "~": constants.context
+        }
     },
     plugins: []
 };
