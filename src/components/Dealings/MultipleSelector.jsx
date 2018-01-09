@@ -1,8 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {
-    chooseIgnoreUsers
-} from '~/actions';
 import {
     FormControl,
     InputLabel,
@@ -43,19 +39,4 @@ const MultipleSelector = ({users, add_dealing_form, handleChooseIgnoreUsers}) =>
     );
 };
 
-const mapStateToProps = ({users, add_dealing_form}) => {
-    return {
-        users,
-        add_dealing_form
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        handleChooseIgnoreUsers: (event) => {
-            dispatch(chooseIgnoreUsers(event.target.value));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MultipleSelector);
+export default MultipleSelector;

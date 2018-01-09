@@ -1,12 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {
-    addDealing,
-    resetDealings,
-    bindNameElement,
-    bindValueElement,
-    chooseIgnoreUsers
-} from '~/actions';
 import {
     TextField,
     Button,
@@ -14,8 +6,8 @@ import {
     MenuItem,
     Grid
 } from 'material-ui';
-import SelectUser from '~/containers/SelectUser';
-import MultipleSelector from '~/containers/MultipleSelector';
+import SelectUser from '~/containers/Dealings/SelectUser';
+import MultipleSelector from '~/containers/Dealings/MultipleSelector';
 
 const AddForm = ({onSubmitAddDealing, onResetDealings, users, menus, add_dealing_form, handleBindNameElement, handleBindValueElement, handleResetIgnoreUsers}) => {
     return (
@@ -78,34 +70,4 @@ const AddForm = ({onSubmitAddDealing, onResetDealings, users, menus, add_dealing
     );
 };
 
-const mapStateToProps = ({users, menus, add_dealing_form}) => {
-    return {
-        users,
-        menus,
-        add_dealing_form
-    };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onSubmitAddDealing: (user_id, name, value, ignore_users) => {
-            dispatch(addDealing(user_id, name, value, ignore_users));
-        },
-        onResetDealings: () => {
-            if (confirm('Reset Dealings')) {
-                dispatch(resetDealings());
-            }
-        },
-        handleBindNameElement: (element) => {
-            dispatch(bindNameElement(element));
-        },
-        handleBindValueElement: (element) => {
-            dispatch(bindValueElement(element));
-        },
-        handleResetIgnoreUsers: () => {
-            dispatch(chooseIgnoreUsers([]));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps, null, {withRef: true})(AddForm);
+export default AddForm;

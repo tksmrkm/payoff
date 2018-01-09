@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import AddForm from './AddForm';
-import DealList from './DealList';
+import AddForm from '~/containers/Dealings/AddForm';
+import DealList from '~/containers/Dealings/DealList';
 
 const Dealings = () => {
     return (
@@ -12,4 +11,4 @@ const Dealings = () => {
     );
 };
 
-export default connect()(Dealings);
+export default Dealings;

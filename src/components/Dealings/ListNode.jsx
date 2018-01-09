@@ -1,8 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { ListItem, ListItemSecondaryAction, ListItemText, IconButton } from 'material-ui';
+import {
+    ListItem,
+    ListItemSecondaryAction,
+    ListItemText,
+    IconButton
+} from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
-import { removeDealing } from '~/actions';
 
 const ListNode = ({ dealing,  onClickRemove }) => {
     const handleRemove = event => {
@@ -35,12 +38,4 @@ const ListNode = ({ dealing,  onClickRemove }) => {
     );
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onClickRemove: id => {
-            dispatch(removeDealing(id))
-        }
-    };
-};
-
-export default connect(null, mapDispatchToProps)(ListNode);
+export default ListNode;

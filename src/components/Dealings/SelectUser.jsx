@@ -1,8 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {
-    selectUser
-} from '~/actions';
 import {
     FormControl,
     InputLabel,
@@ -39,19 +35,4 @@ const SelectUser = ({users, add_dealing_form, handleSelectUser}) => {
     );
 };
 
-const mapStateToProps = ({users, add_dealing_form}) => {
-    return {
-        users,
-        add_dealing_form
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        handleSelectUser: (event) => {
-            dispatch(selectUser(event.target.value));
-        }
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SelectUser);
+export default SelectUser;

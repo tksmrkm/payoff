@@ -1,6 +1,5 @@
 import React from 'react';
-import ListNode from './ListNode';
-import { connect } from 'react-redux';
+import ListNode from '~/containers/Dealings/ListNode';
 import List from 'material-ui/List';
 import { wrapper } from '~/styles';
 
@@ -21,10 +20,4 @@ const DealList = ({dealings}) => {
     )
 };
 
-const mapStateToProps = ({dealings}) => {
-    return {
-        dealings
-    };
-};
-
-export default connect(mapStateToProps)(DealList);
+export default DealList;
