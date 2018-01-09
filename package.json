@@ -10,6 +10,7 @@
     "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^2.30.1",
     "material-ui": "^1.0.0-beta.13",
     "material-ui-icons": "^1.0.0-alpha.19",
     "react": "^15.6.1",
@@ -21,6 +22,7 @@
   },
   "scripts": {
     "js:build": "webpack -p --config config/product.webpack.config.js",
-    "js:watch": "webpack -w --config config/dev.webpack.config.js"
+    "js:watch": "webpack -w --config config/dev.webpack.config.js",
+    "build": "rm -rf dist && yarn run js:build && cp -r src/images dist/images"
   }
 }
